@@ -3,9 +3,12 @@ import { useNavigate } from 'react-router-dom';
 function ImageCard(props) {
     const navigate = useNavigate();
 
+    
     const handdleClick = () => {
+        const propertyType = props.propertyType ? String(props.propertyType).toUpperCase() : null;
         const filter = {
-            city: props.city
+            city: props.city,
+            propertyType
         }
 
         navigate('/search', { state: { filter }});

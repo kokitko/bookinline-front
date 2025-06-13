@@ -1,6 +1,6 @@
 import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { fetchProperties } from '*/api/properties.js';
+import { fetchProperties, fetchFilteredProperties } from '*/api/properties.js';
 
 import Header from '*/components/Header';
 import Footer from '*/components/Footer';
@@ -15,7 +15,17 @@ function PropertyList() {
 
     useEffect(() => {
         if (filter) {
-
+            const response = fetchFilteredProperties(filter, 0, 12);
+            response.then((res) => {
+                if (res.status === 200) {
+                    setData(res.data);
+                    setProperties(res.data.properties);
+                } else {
+                    console.error("Failed to fetch filtered properties");
+                }
+            }).catch((error) => {
+                console.error("Error fetching filtered properties:", error);
+            });
         } else {
             const response = fetchProperties(0, 12);
             response.then((res) => {

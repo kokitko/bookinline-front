@@ -8,6 +8,7 @@ import apartmentImage from '../assets/apartment.jpg';
 import villaImage from '../assets/villa.jpg';
 import loftImage from '../assets/loft.jpg';
 import { useNavigate } from 'react-router-dom';
+import { formatDate } from '*/utils/formatDate.js';
 
 function BookingForm() {
 
@@ -28,7 +29,7 @@ function BookingForm() {
         city: '',
         checkIn: '',
         checkOut: '',
-        people: ''
+        minGuests: ''
     });
     const navigate = useNavigate();
 
@@ -42,11 +43,12 @@ function BookingForm() {
 
     function handleSubmit(event) {
         event.preventDefault();
+
         const filter = {
-            city: formData.city,
-            checkIn: formData.checkIn,
-            checkOut: formData.checkOut,
-            people: formData.people
+            city: (formData.city && formData.city.trim() !== '') ? formData.city.trim() : null,
+            checkIn: (formData.checkIn !== '' ? formatDate(formData.checkIn): null),
+            checkOut: (formData.checkOut !== '' ? formatDate(formData.checkOut) : null),
+            minGuests: (formData.people && formData.people > 0) ? parseInt(formData.people) : null
         };
         navigate('/search', { state: { filter } });
     }
