@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 function Header() {
     return (
-        <header className="bg-blue-500 text-white p-4 flex items-center justify-between">
+        <header className="bg-blue-700 text-white p-4 flex items-center justify-between">
             <div>
                 <h1 className="text-2xl font-bold">Bookinline</h1>
                 <nav>
