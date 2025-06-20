@@ -40,6 +40,9 @@ function PropertyCard({ property }) {
             className="w-full h-48 object-cover rounded-lg shadow-md" />
             <h3>{property.title}</h3>
             <p>{property.city}, {property.address}</p>
+            <span className="flex items-center gap-1 text-yellow-500 font-medium">
+                ★ {(property.averageRating > 0) ? property.averageRating : "N/A"}
+            </span>
         </div>
     );
 }

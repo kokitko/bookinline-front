@@ -6,10 +6,14 @@ export const fetchProperties = (page, size) => {
 }
 
 export const fetchFilteredProperties = (filter, page, size) => {
-    console.log("Fetching filtered properties with filter:", filter);
     const data = axiosInstance.post(
         `/properties/filter?page=${page}&size=${size}`,
         filter
     );
+    return data;
+}
+
+export const fetchPropertyDetails = (propertyId) => {
+    const data = axiosInstance.get(`/properties/${propertyId}`);
     return data;
 }
