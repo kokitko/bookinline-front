@@ -7,6 +7,7 @@ const initialState = {
     fullName: '',
     email: '',
     password: '',
+    repeatPassword: '',
     role: 'GUEST',
 };
 
@@ -30,8 +31,18 @@ function RegisterForm() {
         setLoading(true);
         setError('');
         setSuccess(false);
+
+        if (userData.password !== userData.repeatPassword) {
+            setError('Passwords do not match.');
+            setLoading(false);
+            return;
+        }
+
         try {
-            const res = await register(userData);
+            const res = await register({
+                ...userData,
+                repeatPassword: undefined
+            });
             const data = res.data;
             if (res && data.token) {
                 localStorage.setItem('token', data.token);
@@ -87,6 +98,17 @@ function RegisterForm() {
                         type="password"
                         name="password"
                         value={userData.password}
+                        onChange={handleChange}
+                        required
+                        className="w-full px-3 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                    />
+                </div>
+                <div className="mb-4">
+                    <label className="block mb-2 font-medium">Repeat Password</label>
+                    <input
+                        type="password"
+                        name="repeatPassword"
+                        value={userData.repeatPassword}
                         onChange={handleChange}
                         required
                         className="w-full px-3 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400"

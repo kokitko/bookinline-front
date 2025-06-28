@@ -9,7 +9,9 @@ function Header() {
         <header className="bg-blue-700 text-white shadow-md">
             <div className="max-w-4xl mx-auto flex items-center justify-between px-4 py-3 md:py-4">
                 <div className="flex items-center">
-                    <h1 className="text-2xl font-bold tracking-tight mr-6">Bookinline</h1>
+                    <h1 className="text-2xl font-bold tracking-tight mr-6">
+                        <Link to="/" className="cursor-pointer">Bookinline</Link>
+                    </h1>
                     <nav className="hidden md:block">
                         <ul className="flex space-x-6 text-base">
                             <li><Link to="/" className="hover:underline">Home</Link></li>
@@ -25,7 +27,7 @@ function Header() {
                             <Link to="/register" className="hover:underline">Register</Link>
                         </>
                     ) : (
-                        <Link to="/" className="hover:underline">My Profile</Link>
+                        <Link to="/profile" className="hover:underline">My Profile</Link>
                     )}
                 </div>
                 {/* Mobile menu button */}
@@ -60,7 +62,7 @@ function Header() {
                                 <Link to="/register" className="hover:underline" onClick={() => setMenuOpen(false)}>Register</Link>
                             </>
                         ) : (
-                            <Link to="/" className="hover:underline" onClick={() => setMenuOpen(false)}>My Profile</Link>
+                            <Link to="/profile" className="hover:underline" onClick={() => setMenuOpen(false)}>My Profile</Link>
                         )}
                     </div>
                 </div>
