@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { register } from '../api/auth.js'; 
+import { register } from '../auth/authService.js'; 
 import React, { useState } from 'react';
+import { useAuth } from '../auth/AuthContext.jsx';
 
 const initialState = {
     fullName: '',
@@ -17,6 +18,7 @@ function RegisterForm() {
     const [error, setError] = useState('');
     const [success, setSuccess] = useState(false);
     const navigate = useNavigate();
+    const { fetchUser } = useAuth();
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -44,10 +46,10 @@ function RegisterForm() {
                 repeatPassword: undefined
             });
             const data = res.data;
-            if (res && data.token) {
-                localStorage.setItem('token', data.token);
+            if (res.status === 200 && data.accessToken) {
                 setSuccess(true);
                 setUserData(initialState);
+                await fetchUser();
                 navigate('/');
             } else {
                 setError('Registration failed.');
@@ -60,7 +62,7 @@ function RegisterForm() {
     };
 
     useEffect(() => {
-        const token = localStorage.getItem('token');
+        const token = sessionStorage.getItem('accessToken');
         if (token) {
             navigate('/');
         }

@@ -1,7 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
+import { useAuth } from '../auth/AuthContext.jsx';
 
-import { login } from '../api/auth.js';
+import { login } from '../auth/authService.js';
 
 const initialState = {
     email: '',
@@ -14,6 +15,7 @@ function LoginForm() {
     const [error, setError] = useState('');
     const [success, setSuccess] = useState(false);
     const navigate = useNavigate();
+    const { fetchUser } = useAuth();
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -31,13 +33,13 @@ function LoginForm() {
         try {
             const res = await login(userData);
             const data = res.data;
-            if (res && data.token) {
-                localStorage.setItem('token', data.token);
+            if (res.status === 200 && data.accessToken) {
                 setSuccess(true);
                 setUserData(initialState);
+                await fetchUser();
                 navigate('/');
             } else {
-                setError('Login failed.');
+                setError('Invalid credentials. Please try again.');
             }
         } catch (err) {
             setError(err.message || 'Login failed.');
@@ -47,7 +49,7 @@ function LoginForm() {
     };
 
     useEffect(() => {
-        const token = localStorage.getItem('token');
+        const token = sessionStorage.getItem('accessToken');
         if (token) {
             navigate('/');
         }

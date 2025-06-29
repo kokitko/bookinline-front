@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 
 function Header() {
-    const hasToken = !!localStorage.getItem('token');
+    const hasToken = !!sessionStorage.getItem('accessToken');
     const [menuOpen, setMenuOpen] = useState(false);
 
     return (
