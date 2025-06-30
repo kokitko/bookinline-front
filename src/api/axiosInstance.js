@@ -1,7 +1,6 @@
 import axios from 'axios';
-import { refreshToken } from '../auth/authService.js';
-
-const apiUrl = "http://localhost:8080";
+import { refreshToken, getAccessToken } from '../auth/authService.js';
+import { apiUrl } from '../config.js';
 
 const axiosInstance = axios.create({
     baseURL: `${apiUrl}/api`,
@@ -14,7 +13,7 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
     config => {
-        const token = sessionStorage.getItem('accessToken');
+        const token = getAccessToken();
         if (token) {
             config.headers['Authorization'] = `Bearer ${token}`;
         }

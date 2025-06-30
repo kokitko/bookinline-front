@@ -16,16 +16,16 @@ export const AuthProvider = ({ children }) => {
                 if (!token) {
                     setIsAuthenticated(false);
                     setUser(null);
-                    setReady(true);
                     return;
                 }
                 await refreshToken();
-                setIsAuthenticated(true);
                 const res = await fetchUserDetails();
                 if (res && res.data) {
                     setUser(res.data);
+                    setIsAuthenticated(true);
                 } else {
                     setUser(null);
+                    setIsAuthenticated(false);
                 }
             } catch (err) {
                 setIsAuthenticated(false);

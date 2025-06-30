@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import { getAccessToken } from '../auth/authService.js';
 
 function Header() {
-    const hasToken = !!sessionStorage.getItem('accessToken');
+    const hasToken = !!getAccessToken();
     const [menuOpen, setMenuOpen] = useState(false);
 
     return (
