@@ -9,6 +9,8 @@ import Footer from '*/components/Footer';
 import ArrowRight from '*/assets/arrow_right.svg';
 import ArrowLeft from '*/assets/arrow_left.svg';
 
+import CreateBookingForm from '*/components/CreateBookingForm.jsx';
+
 function PropertyDetails() {
     const { id } = useParams();
     const navigate = useNavigate();
@@ -16,6 +18,7 @@ function PropertyDetails() {
     const [property, setProperty] = useState(null);
     const [reviewsData, setReviewsData] = useState(null);
     const [reviews, setReviews] = useState([]);
+    const [booking, setBooking] = useState(false);
     const [loading, setLoading] = useState(true);
 
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -79,43 +82,43 @@ function PropertyDetails() {
     };
 
     const handleBookNow = () => {
-        navigate(`/property/${property.id}/booking`);
+        setBooking(true);
     }
 
-// Pagination state for reviews
-const [reviewPage, setReviewPage] = useState(0);
-const [isLastReviewPage, setIsLastReviewPage] = useState(true);
-const REVIEWS_PAGE_SIZE = 10;
+    // Pagination state for reviews
+    const [reviewPage, setReviewPage] = useState(0);
+    const [isLastReviewPage, setIsLastReviewPage] = useState(true);
+    const REVIEWS_PAGE_SIZE = 10;
 
-useEffect(() => {
-    if (property) {
-        fetchReviews(property.id, reviewPage, REVIEWS_PAGE_SIZE)
-            .then((res) => {
-                if (res.status === 200) {
-                    setReviewsData(res.data);
-                    setReviews(res.data.reviews);
-                    setIsLastReviewPage(res.data.last);
-                } else {
-                    console.error("Failed to fetch reviews");
-                }
-            })
-            .catch((error) => {
-                console.error("Error fetching reviews:", error);
-            });
-    }
-}, [property, reviewPage]);
+    useEffect(() => {
+        if (property) {
+            fetchReviews(property.id, reviewPage, REVIEWS_PAGE_SIZE)
+                .then((res) => {
+                    if (res.status === 200) {
+                        setReviewsData(res.data);
+                        setReviews(res.data.reviews);
+                        setIsLastReviewPage(res.data.last);
+                    } else {
+                        console.error("Failed to fetch reviews");
+                    }
+                })
+                .catch((error) => {
+                    console.error("Error fetching reviews:", error);
+                });
+        }
+    }, [property, reviewPage]);
 
-useEffect(() => {
-    setReviewPage(0);
-}, [property]);
+    useEffect(() => {
+        setReviewPage(0);
+    }, [property]);
 
-const handleNextReviewPage = () => {
-    if (!isLastReviewPage) setReviewPage((prev) => prev + 1);
-};
+    const handleNextReviewPage = () => {
+        if (!isLastReviewPage) setReviewPage((prev) => prev + 1);
+    };
 
-const handlePrevReviewPage = () => {
-    if (reviewPage > 0) setReviewPage((prev) => prev - 1);
-};
+    const handlePrevReviewPage = () => {
+        if (reviewPage > 0) setReviewPage((prev) => prev - 1);
+    };
 
 return (
     <>
@@ -180,16 +183,20 @@ return (
                             <span className="flex items-center gap-1 text-yellow-500 font-medium">
                                 ★ {(property.averageRating > 0) ? property.averageRating : "N/A"}
                             </span>
-                            <button onClick={handleBookNow} 
+                            {!booking && <button onClick={handleBookNow} 
                                 className="ml-auto bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition cursor-pointer">
                                 Book Now
-                            </button>
+                            </button>}
                         </div>
                     </div>
                 </div>
             ) : (
                 <span className="mt-10 text-gray-500 text-lg">Loading property details...</span>
             )}
+
+            {booking && <CreateBookingForm pricePerNight={property?.pricePerNight}
+                                            propertyId={property?.id}
+            />}
 
             <div className="w-full max-w-3xl mt-10 bg-white rounded-lg shadow p-6">
                 <h3 className="text-xl font-semibold mb-4 text-gray-800">Property reviews</h3>

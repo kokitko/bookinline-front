@@ -21,11 +21,6 @@ function App() {
           <Route path="/property/:id" element={<PropertyDetails />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/property/:id/booking" element={
-            <PrivateRoute>
-              <CreateBooking />
-            </PrivateRoute>
-          } />
           <Route path="/profile" element={
             <PrivateRoute>
               <Profile />
