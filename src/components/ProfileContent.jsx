@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useAuth } from "../auth/AuthContext";
 import { logout } from "../auth/authService";
 import { useNavigate } from "react-router-dom";
-import axiosInstance from "*/api/axiosInstance.js";
 import { updateUserEmail,
         updateUserPhoneNumber,
         updateUserPassword,
