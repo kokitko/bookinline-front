@@ -29,11 +29,24 @@ function BookingDates(props) {
     ]);
 
     function handleDateRangeChange(item) {
-        setRange([item.selection]);
+        const { startDate, endDate } = item.selection;
+        let safeEndDate = endDate;
+        if (
+            startDate &&
+            endDate &&
+            (endDate <= startDate)
+        ) {
+            safeEndDate = addDays(startDate, 1);
+        }
+        setRange([{
+            startDate,
+            endDate: safeEndDate,
+            key: 'selection'
+        }]);
         setFormData(prev => ({
             ...prev,
-            checkIn: format(item.selection.startDate, 'dd/MM/yyyy'),
-            checkOut: format(item.selection.endDate, 'dd/MM/yyyy')
+            checkIn: format(startDate, 'dd/MM/yyyy'),
+            checkOut: format(safeEndDate, 'dd/MM/yyyy')
         }));
     }
 

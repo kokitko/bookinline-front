@@ -65,3 +65,15 @@ export async function deleteUserAccount(passwordData) {
         throw error;
     }
 }
+
+export async function fetchUserById(userId) {
+    try {
+        const res = await axios.get(`/user/${userId}`);
+        if (res.status !== 200) {
+            throw new Error('Failed to fetch user by ID');
+        }
+        return res;
+    } catch (error) {
+        throw error;
+    }
+}

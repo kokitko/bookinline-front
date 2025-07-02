@@ -15,9 +15,8 @@ function Header() {
                     </h1>
                     <nav className="hidden md:block">
                         <ul className="flex space-x-6 text-base">
-                            <li><Link to="/" className="hover:underline">Home</Link></li>
+                            {hasToken && <li><Link to="/bookings" className="hover:underline">My Bookings</Link></li>}
                             <li><Link to="/" className="hover:underline">About</Link></li>
-                            <li><Link to="/" className="hover:underline">Contact</Link></li>
                         </ul>
                     </nav>
                 </div>
@@ -51,9 +50,8 @@ function Header() {
                 <div className="md:hidden px-4 pb-4">
                     <nav>
                         <ul className="flex flex-col space-y-2 text-base">
-                            <li><Link to="/" className="hover:underline" onClick={() => setMenuOpen(false)}>Home</Link></li>
-                            <li><Link to="/" className="hover:underline" onClick={() => setMenuOpen(false)}>About</Link></li>
-                            <li><Link to="/" className="hover:underline" onClick={() => setMenuOpen(false)}>Contact</Link></li>
+                            {hasToken && <li><Link to="/bookings" className="hover:underline">My Bookings</Link></li>}
+                            <li><Link to="/" className="hover:underline">About</Link></li>
                         </ul>
                     </nav>
                     <div className="flex flex-col space-y-2 mt-4">

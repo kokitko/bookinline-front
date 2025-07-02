@@ -5,10 +5,11 @@ import { AuthProvider } from './auth/AuthContext.jsx';
 import Home from './pages/home/Home.jsx';
 import PropertyList from './pages/properties/PropertyList.jsx';
 import PropertyDetails from './pages/properties/PropertyDetails.jsx';
-import CreateBooking from './pages/bookings/CreateBooking.jsx';
 import Register from './pages/auth/Register.jsx';
 import Login from './pages/auth/Login.jsx';
 import Profile from './pages/profiles/Profile.jsx';
+import MyBookings from './pages/bookings/MyBookings.jsx';
+import Booking from './pages/bookings/Booking.jsx';
 
 function App() {
 
@@ -24,6 +25,16 @@ function App() {
           <Route path="/profile" element={
             <PrivateRoute>
               <Profile />
+            </PrivateRoute>
+          } />
+          <Route path="/bookings" element={
+            <PrivateRoute>
+              <MyBookings />
+            </PrivateRoute>
+          } />
+          <Route path="/booking/:id" element={
+            <PrivateRoute>
+              <Booking />
             </PrivateRoute>
           } />
         </Routes>

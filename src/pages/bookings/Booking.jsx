@@ -1,16 +1,16 @@
 
 import Header from "*/components/Header.jsx";
-import MyBookingsList from "*/components/MyBookingsList.jsx";
+import BookingDetails from "*/components/BookingDetails.jsx";
 import Footer from "*/components/Footer.jsx";
 
-function MyBookings() {
+function Booking() {
     return (
         <>
             <Header />
-            <MyBookingsList />
+            <BookingDetails />
             <Footer />
         </>
-    )
+    );
 }
 
-export default MyBookings;
+export default Booking;
