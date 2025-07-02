@@ -1,6 +1,7 @@
 import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { fetchProperties, fetchFilteredProperties } from '*/api/properties.js';
+import PropertiesFilter from '*/components/PropertiesFilter.jsx';
 
 import Header from '*/components/Header';
 import Footer from '*/components/Footer';
@@ -8,17 +9,19 @@ import PropertyCard from '*/components/PropertyCard.jsx';
 
 function PropertyList() {
     const location = useLocation();
-    const filter = location.state?.filter;
+    const [filters, setFilters] = useState(location.state?.filter);
 
     const [data, setData] = useState({});
     const [properties, setProperties] = useState([]);
     const [page, setPage] = useState(0);
     const [size, setSize] = useState(12);
 
+    const [showFilter, setShowFilter] = useState(false);
+
     useEffect(() => {
         let response;
-        if (filter) {
-            response = fetchFilteredProperties(filter, page, size);
+        if (filters) {
+            response = fetchFilteredProperties(filters, page, size);
         } else {
             response = fetchProperties(page, size);
         }
@@ -34,7 +37,7 @@ function PropertyList() {
             setProperties([]);
             console.error("Error fetching properties:", error);
         });
-    }, [filter, page]);
+    }, [filters, page]);
 
     const handlePrev = () => {
         if (page > 0) setPage(page - 1);
@@ -47,6 +50,19 @@ function PropertyList() {
     return (
         <>
             <Header />
+            <div className="flex justify-center mt-4">
+                <button
+                    className="px-4 py-2 bg-blue-600 text-white rounded shadow hover:bg-blue-700 transition font-semibold md:hidden block"
+                    onClick={() => setShowFilter((prev) => !prev)}
+                >
+                    {showFilter ? "Hide Filters" : "Show Filters"}
+                </button>
+            </div>
+            {(showFilter || window.innerWidth >= 768) && (
+                <div className="mt-4">
+                    <PropertiesFilter setFiltersMain={setFilters} setPage={setPage} setSize={setSize} />
+                </div>
+            )}
             <div className="flex justify-center items-center min-h-[60vh]">
                 <div className="container mx-auto px-4 py-8 text-center">
                     <h1 className="text-2xl font-bold mb-6">Available Properties</h1>

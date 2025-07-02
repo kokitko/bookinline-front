@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import BookingDates from "./BookingDates.jsx";
 import { useAuth } from "../auth/AuthContext.jsx";
 import { createBooking } from "../api/bookings.js";
@@ -68,7 +68,7 @@ function CreateBookingForm({ pricePerNight, propertyId }) {
                             ? `${formData.checkIn} — ${formData.checkOut}`
                             : "Select dates"}
                     </div>
-                    </div>
+                </div>
             </div>
             <BookingDates
                 showCalendar={showCalendar}
@@ -80,7 +80,7 @@ function CreateBookingForm({ pricePerNight, propertyId }) {
                 <div className="bg-gray-100 rounded px-3 py-2">
                     <strong className="text-gray-700">Total price:</strong>{" "}
                     <span className="text-gray-900">
-                        ${totalPrice} ({totalNights} night{totalNights > 1 ? "s" : ""} @ ${pricePerNight}/night)
+                        ${totalPrice} ({totalNights} night{totalNights > 1 ? "s" : ""} @ {pricePerNight}zł/night)
                     </span>
                 </div>
             )}

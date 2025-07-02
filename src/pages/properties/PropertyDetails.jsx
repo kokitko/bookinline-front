@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { fetchImage } from '*/api/images.js';
 import { fetchPropertyDetails } from '*/api/properties.js';
 import { fetchReviews } from '*/api/reviews.js';
+import { useAuth } from '*/auth/AuthContext.jsx';
 
 import Header from '*/components/Header';
 import Footer from '*/components/Footer';
@@ -15,6 +16,7 @@ function PropertyDetails() {
     const { id } = useParams();
     const navigate = useNavigate();
 
+    const { user } = useAuth(); 
     const [property, setProperty] = useState(null);
     const [reviewsData, setReviewsData] = useState(null);
     const [reviews, setReviews] = useState([]);
@@ -82,6 +84,10 @@ function PropertyDetails() {
     };
 
     const handleBookNow = () => {
+        if (!user) {
+            navigate("/login");
+            return;
+        }
         setBooking(true);
     }
 
