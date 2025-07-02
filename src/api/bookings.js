@@ -10,3 +10,12 @@ export const createBooking = async (bookingData, propertyId) => {
         throw error;
     }
 };
+
+export const getBookedDates = async (propertyId) => {
+    try {
+        const response = await axiosInstance.get(`/bookings/property/${propertyId}/dates`);
+        return response;
+    } catch (error) {
+        throw error;
+    }
+}

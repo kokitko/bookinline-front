@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import BookingDates from "./BookingDates.jsx";
 import { useAuth } from "../auth/AuthContext.jsx";
-import { createBooking } from "../api/bookings.js";
+import { createBooking, getBookedDates } from "../api/bookings.js";
 import { useNavigate } from "react-router-dom";
 
 
@@ -12,6 +12,25 @@ function CreateBookingForm({ pricePerNight, propertyId }) {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
     const calendarButtonRef = React.useRef(null);
+
+    const [bookedDates, setBookedDates] = useState([]);
+    React.useEffect(() => {
+        let isMounted = true;
+        async function fetchBookedDates() {
+            try {
+                const res = await getBookedDates(propertyId);
+                if (isMounted) {
+                    setBookedDates(res.data || []);
+                }
+            } catch (e) {
+                if (isMounted) {
+                    setBookedDates([]);
+                }
+            }
+        }
+        fetchBookedDates();
+        return () => { isMounted = false; };
+    }, [propertyId]);
 
     const navigate = useNavigate();
 
@@ -75,12 +94,13 @@ function CreateBookingForm({ pricePerNight, propertyId }) {
                 setShowCalendar={setShowCalendar}
                 formData={formData}
                 setFormData={setFormData}
+                bookedDates={bookedDates}
             />
             {formData.checkIn && formData.checkOut && (
                 <div className="bg-gray-100 rounded px-3 py-2">
                     <strong className="text-gray-700">Total price:</strong>{" "}
                     <span className="text-gray-900">
-                        ${totalPrice} ({totalNights} night{totalNights > 1 ? "s" : ""} @ {pricePerNight}zł/night)
+                        {totalPrice}zł ({totalNights} night{totalNights > 1 ? "s" : ""} @ {pricePerNight}zł/night)
                     </span>
                 </div>
             )}

@@ -1,12 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { DateRange } from 'react-date-range';
-import { format } from 'date-fns';
+import { format, addDays, parseISO } from 'date-fns';
+
+function expandBookedDates(bookedRanges) {
+    const disabled = [];
+    bookedRanges.forEach(({ checkInDate, checkOutDate }) => {
+        let current = parseISO(checkInDate);
+        const end = parseISO(checkOutDate);
+        while (current < end) {
+            disabled.push(new Date(current));
+            current = addDays(current, 1);
+        }
+    });
+    return disabled;
+}
 
 function BookingDates(props) {
-    const showCalendar = props.showCalendar;
-    const setShowCalendar = props.setShowCalendar;
-    const formData = props.formData;
-    const setFormData = props.setFormData;
+    const { showCalendar, setShowCalendar, formData, setFormData, bookedDates = [] } = props;
+
+    const disabledDates = useMemo(() => expandBookedDates(bookedDates), [bookedDates]);
 
     const [range, setRange] = useState([
         {
@@ -23,7 +35,7 @@ function BookingDates(props) {
             checkIn: format(item.selection.startDate, 'dd/MM/yyyy'),
             checkOut: format(item.selection.endDate, 'dd/MM/yyyy')
         }));
-    }    
+    }
 
     return (
         <>
@@ -44,6 +56,7 @@ function BookingDates(props) {
                             rangeColors={["#2563eb"]}
                             minDate={new Date()}
                             className="rounded"
+                            disabledDates={disabledDates}
                         />
                         <button
                             type="button"
