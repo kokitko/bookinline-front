@@ -10,6 +10,7 @@ import Login from './pages/auth/Login.jsx';
 import Profile from './pages/profiles/Profile.jsx';
 import MyBookings from './pages/bookings/MyBookings.jsx';
 import Booking from './pages/bookings/Booking.jsx';
+import LeaveReview from './pages/reviews/LeaveReview.jsx';
 
 function App() {
 
@@ -35,6 +36,11 @@ function App() {
           <Route path="/booking/:id" element={
             <PrivateRoute>
               <Booking />
+            </PrivateRoute>
+          } />
+          <Route path="/property/:id/review" element={
+            <PrivateRoute>
+              <LeaveReview />
             </PrivateRoute>
           } />
         </Routes>

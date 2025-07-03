@@ -39,3 +39,12 @@ export const fetchBookingDetails = async (bookingId) => {
         throw error;
     }
 }
+
+export const cancelBooking = async (bookingId) => {
+    try {
+        const response = await axiosInstance.delete(`/bookings/${bookingId}`);
+        return response;
+    } catch (error) {
+        throw error;
+    }
+}

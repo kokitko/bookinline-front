@@ -1,14 +1,19 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { fetchBookingDetails } from '../api/bookings.js';
+import { useEffect, useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { fetchBookingDetails, cancelBooking } from '../api/bookings.js';
 import { fetchUserById } from '../api/users.js';
+import { useAuth } from '../auth/AuthContext';
+import { fetchHasReview } from '../api/reviews.js';
 
 const BookingDetails = () => {
     const { id } = useParams();
+    const navigate = useNavigate();
+    const { user } = useAuth();
     const [booking, setBooking] = useState(null);
     const [host, setHost] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
+    const [showLeaveReview, setShowLeaveReview] = useState(false);
 
     useEffect(() => {
         const getBookingDetails = async () => {
@@ -16,9 +21,8 @@ const BookingDetails = () => {
                 setLoading(true);
                 setError('');
                 const response = await fetchBookingDetails(id);
-                setBooking(response.data);
-
                 if (response.data && response.data.hostId) {
+                    setBooking(response.data);
                     const hostRes = await fetchUserById(response.data.hostId);
                     setHost(hostRes.data);
                 }
@@ -29,7 +33,35 @@ const BookingDetails = () => {
             }
         };
         getBookingDetails();
+
     }, [id]);
+
+    useEffect(() => {
+        const checkReviewStatus = async () => {
+            if (
+                booking &&
+                booking.status === 'CHECKED_OUT' &&
+                user &&
+                user.role === 'GUEST' &&
+                booking.guestId === user.id
+            ) {
+                try {
+                    const response = await fetchHasReview(booking.propertyId);
+                    if (response.data) {
+                        setShowLeaveReview(false);
+                    } else {
+                        setShowLeaveReview(true);
+                    }
+                } catch (err) {
+                    console.error('Failed to check review status:', err);
+                    setShowLeaveReview(false);
+                }
+            } else {
+                setShowLeaveReview(false);
+            }
+        };
+        checkReviewStatus();
+    }, [booking, user]);
 
     if (loading) {
         return (
@@ -51,6 +83,30 @@ const BookingDetails = () => {
         return null;
     }
 
+    const handleLeaveReview = () => {
+        navigate(`/property/${booking.propertyId}/review`);
+    };
+
+    const handleCancelBooking = () => {
+        if (window.confirm('Are you sure you want to cancel this booking?')) {
+            cancelBooking(booking.id)
+                .then(() => {
+    const showCancelBooking =
+        booking &&
+        booking.status === 'PENDING' &&
+        user &&
+        user.role === 'GUEST' &&
+        booking.guestId === user.id;
+                });
+        }
+    };
+    
+    const showCancelBooking =
+        booking.status === 'PENDING' &&
+        user &&
+        user.role === 'GUEST' &&
+        booking.guestId === user.id;
+
     return (
         <div className="max-w-xl mx-auto mt-10 bg-white shadow-lg rounded-lg p-8">
             <h2 className="text-2xl font-bold mb-6 text-gray-800">Booking Details</h2>
@@ -70,9 +126,27 @@ const BookingDetails = () => {
                 <span className="font-semibold text-gray-700">Check-Out Date:</span>
                 <span className="ml-2 text-gray-900">{booking.checkOutDate}</span>
             </div>
-            <div className="mb-6">
-                <span className="font-semibold text-gray-700">Status:</span>
-                <span className="ml-2 text-gray-900">{booking.status}</span>
+            <div className="mb-6 flex items-center justify-between">
+                <div>
+                    <span className="font-semibold text-gray-700">Status:</span>
+                    <span className="ml-2 text-gray-900">{booking.status}</span>
+                </div>
+                {showCancelBooking && (
+                    <button
+                        className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition cursor-pointer"
+                        onClick={handleCancelBooking}
+                    >
+                        Cancel Booking
+                    </button>
+                )}
+                {showLeaveReview && (
+                    <button
+                        className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition cursor-pointer"
+                        onClick={handleLeaveReview}
+                    >
+                        Leave Review
+                    </button>
+                )}
             </div>
             {host && (
                 <div className="mb-4 border-t pt-4">
