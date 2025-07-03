@@ -24,3 +24,11 @@ export const fetchLeaveReview = async (propertyId, info) => {
         throw error;
     }
 };
+
+export const fetchUserReviews = async (userId, page, size) => {
+    try {
+        return await axiosInstance.get(`/reviews/user/${userId}?page=${page}&size=${size}`);
+    } catch (error) {
+        throw error;
+    }
+}

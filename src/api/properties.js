@@ -1,19 +1,19 @@
 import axiosInstance from './axiosInstance';
 
 export const fetchProperties = (page, size) => {
-    const data = axiosInstance.get(`/properties/available?page=${page}&size=${size}`);
-    return data;
+    const response = axiosInstance.get(`/properties/available?page=${page}&size=${size}`);
+    return response;
 }
 
 export const fetchFilteredProperties = (filter, page, size) => {
-    const data = axiosInstance.post(
+    const response = axiosInstance.post(
         `/properties/filter?page=${page}&size=${size}`,
         filter
     );
-    return data;
+    return response;
 }
 
 export const fetchPropertyDetails = (propertyId) => {
-    const data = axiosInstance.get(`/properties/${propertyId}`);
-    return data;
+    const response = axiosInstance.get(`/properties/${propertyId}`);
+    return response;
 }
