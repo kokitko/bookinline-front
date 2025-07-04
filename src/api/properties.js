@@ -17,3 +17,18 @@ export const fetchPropertyDetails = (propertyId) => {
     const response = axiosInstance.get(`/properties/${propertyId}`);
     return response;
 }
+
+export const fetchCreateProperty = (propertyData, images = []) => {
+    const formData = new FormData();
+    formData.append('property', JSON.stringify(propertyData));
+    if (images && images.length > 0) {
+        images.forEach(file => {
+            formData.append('images', file);
+        });
+    }
+    return axiosInstance.post('/properties/create', formData, {
+        headers: {
+            'Content-Type': undefined
+        }
+    });
+};

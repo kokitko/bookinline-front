@@ -12,6 +12,7 @@ import MyBookings from './pages/bookings/MyBookings.jsx';
 import Booking from './pages/bookings/Booking.jsx';
 import LeaveReview from './pages/reviews/LeaveReview.jsx';
 import MyReviews from './pages/reviews/MyReviews.jsx';
+import CreateProperty from './pages/properties/CreateProperty.jsx';
 
 function App() {
 
@@ -47,6 +48,11 @@ function App() {
           <Route path="/my-reviews" element={
             <PrivateRoute>
               <MyReviews />
+            </PrivateRoute>
+          } />
+          <Route path="/property/create" element={
+            <PrivateRoute>
+              <CreateProperty />
             </PrivateRoute>
           } />
         </Routes>
