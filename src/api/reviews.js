@@ -32,3 +32,11 @@ export const fetchUserReviews = async (userId, page, size) => {
         throw error;
     }
 }
+
+export const fetchDeleteReview = async (reviewId) => {
+    try {
+        return await axiosInstance.delete(`/reviews/${reviewId}`);
+    } catch (error) {
+        throw error;
+    }
+}
