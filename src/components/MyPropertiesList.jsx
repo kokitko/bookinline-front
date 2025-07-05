@@ -1,8 +1,9 @@
 
-import { fetchMyProperties } from "../api/properties.js";
+import { fetchMyProperties, fetchDeleteProperty } from "../api/properties.js";
 import { fetchImage } from "../api/images.js";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const PAGE_SIZE = 10;
 
@@ -12,6 +13,7 @@ export default function MyProperties() {
     const [totalPages, setTotalPages] = useState(0);
     const [loading, setLoading] = useState(false);
     const [imageUrls, setImageUrls] = useState({});
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchProperties = async () => {
@@ -43,9 +45,25 @@ export default function MyProperties() {
     }, [page]);
 
     const handleEdit = (id) => {
+        navigate(`/properties/edit/${id}`, {
+            state: { propertyId: id }
+        });
     };
 
     const handleDelete = (id) => {
+        if (window.confirm("Are you sure you want to delete this property?")) {
+            fetchDeleteProperty(id)
+                .then(() => {
+                    setProperties((prev) => prev.filter((p) => p.id !== id));
+                    if (page > 0 && properties.length === 1) {
+                        setPage((prev) => Math.max(0, prev - 1));
+                    }
+                })
+                .catch((err) => {
+                    console.error("Failed to delete property:", err);
+                    alert("Failed to delete property. Please try again.");
+                });
+        }
     };
 
     return (
@@ -87,19 +105,19 @@ export default function MyProperties() {
                         {property.pricePerNight}zł / night
                         </div>
                         <div className="text-xs text-yellow-500">
-                        Rating: {property.averageRating ?? "N/A"}
+                        Rating: {property.averageRating == 0 ? "N/A" : property.averageRating}
                         </div>
                     </div>
                     <div className="flex gap-2 mt-4">
                         <button
                         onClick={() => handleEdit(property.id)}
-                        className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
+                        className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 transition cursor-pointer"
                         >
                         Edit
                         </button>
                         <button
                         onClick={() => handleDelete(property.id)}
-                        className="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600 transition"
+                        className="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600 transition cursor-pointer"
                         >
                         Delete
                         </button>

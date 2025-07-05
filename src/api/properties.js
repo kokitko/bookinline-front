@@ -23,6 +23,11 @@ export const fetchMyProperties = (page, size) => {
     return response;
 }
 
+export const fetchDeleteProperty = (propertyId) => {
+    const response = axiosInstance.delete(`/properties/delete/${propertyId}`);
+    return response;
+}
+
 export const fetchCreateProperty = (propertyData, images = []) => {
     const formData = new FormData();
     formData.append('property', JSON.stringify(propertyData));
@@ -37,3 +42,18 @@ export const fetchCreateProperty = (propertyData, images = []) => {
         }
     });
 };
+
+export const fetchEditProperty = (propertyId, propertyData, images = []) => {
+    const formData = new FormData();
+    formData.append('property', JSON.stringify(propertyData));
+    if (images && images.length > 0) {
+        images.forEach(file => {
+            formData.append('images', file);
+        });
+    }
+    return axiosInstance.put(`/properties/update/${propertyId}`, formData, {
+        headers: {
+            'Content-Type': undefined
+        }
+    });
+}
