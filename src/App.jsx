@@ -2,7 +2,9 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import PrivateRoute from './routes/PrivateRoute.jsx';
 import { AuthProvider } from './auth/AuthContext.jsx';
 
+import LostPage from './pages/LostPage.jsx';
 import Home from './pages/home/Home.jsx';
+import About from './pages/home/About.jsx';
 import PropertyList from './pages/properties/PropertyList.jsx';
 import PropertyDetails from './pages/properties/PropertyDetails.jsx';
 import Register from './pages/auth/Register.jsx';
@@ -23,53 +25,55 @@ function App() {
     <AuthProvider>
       <Router>
         <Routes>
+          <Route path="*" element={<LostPage />} />
           <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
           <Route path="/search" element={<PropertyList />} />
           <Route path="/property/:id" element={<PropertyDetails />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/profile" element={
-            <PrivateRoute>
+            <PrivateRoute allowedRoles={['GUEST', 'HOST']}>
               <Profile />
             </PrivateRoute>
           } />
           <Route path="/bookings" element={
-            <PrivateRoute>
+            <PrivateRoute allowedRoles={['GUEST']}>
               <MyBookings />
             </PrivateRoute>
           } />
           <Route path="/booking/:id" element={
-            <PrivateRoute>
+            <PrivateRoute allowedRoles={['GUEST', 'HOST']}>
               <Booking />
             </PrivateRoute>
           } />
           <Route path="/property/:id/review" element={
-            <PrivateRoute>
+            <PrivateRoute allowedRoles={['GUEST']}>
               <LeaveReview />
             </PrivateRoute>
           } />
           <Route path="/my-reviews" element={
-            <PrivateRoute>
+            <PrivateRoute allowedRoles={['GUEST']}>
               <MyReviews />
             </PrivateRoute>
           } />
           <Route path="/property/create" element={
-            <PrivateRoute>
+            <PrivateRoute allowedRoles={['HOST']}>
               <CreateProperty />
             </PrivateRoute>
           } />
           <Route path="/properties/list" element={
-            <PrivateRoute>
+            <PrivateRoute allowedRoles={['HOST']}>
               <MyProperties />
             </PrivateRoute>
           } />
           <Route path="/properties/edit/:id" element={
-            <PrivateRoute>
+            <PrivateRoute allowedRoles={['HOST']}>
               <EditProperty />
             </PrivateRoute>
           } />
           <Route path="/bookings/host" element={
-            <PrivateRoute>
+            <PrivateRoute allowedRoles={['HOST']}>
               <HostBookings />
             </PrivateRoute>
           } />

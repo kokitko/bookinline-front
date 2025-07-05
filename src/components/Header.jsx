@@ -25,7 +25,7 @@ function Header() {
                             {hasToken && role === 'HOST' && <li><Link to="/properties/list" className="hover:underline">My Properties</Link></li>}
                             {hasToken && role === 'HOST' && <li><Link to="/bookings/host" className="hover:underline">Host Bookings</Link></li>}
 
-                            <li><Link to="/" className="hover:underline">About</Link></li>
+                            <li><Link to="/about" className="hover:underline">About</Link></li>
                         </ul>
                     </nav>
                 </div>
@@ -66,7 +66,7 @@ function Header() {
                             {hasToken && role === 'HOST' && <li><Link to="/properties/list" className="hover:underline">My Properties</Link></li>}
                             {hasToken && role === 'HOST' && <li><Link to="/bookings/host" className="hover:underline">Host Bookings</Link></li>}
 
-                            <li><Link to="/" className="hover:underline">About</Link></li>
+                            <li><Link to="/about" className="hover:underline">About</Link></li>
                         </ul>
                     </nav>
                     <div className="flex flex-col space-y-2 mt-4">

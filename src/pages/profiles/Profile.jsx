@@ -7,7 +7,7 @@ function Profile() {
     return (
         <>
             <Header />
-                <ProfileContent />
+            <ProfileContent />
             <Footer />
         </>
     )

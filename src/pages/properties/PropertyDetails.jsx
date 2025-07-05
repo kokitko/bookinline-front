@@ -1,5 +1,6 @@
 import react, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import { useAuth } from '*/auth/AuthContext.jsx';
 import { fetchPropertyDetails } from '*/api/properties.js';
 import { fetchReviews } from '*/api/reviews.js';
 
@@ -12,6 +13,7 @@ import CreateBookingForm from '*/components/CreateBookingForm.jsx';
 function PropertyDetails() {
     const { id } = useParams();
 
+    const { user } = useAuth();
     const [property, setProperty] = useState(null);
     const [reviewsData, setReviewsData] = useState(null);
     const [reviews, setReviews] = useState([]);
@@ -32,6 +34,7 @@ function PropertyDetails() {
 
     useEffect(() => {
         if (property) {
+            
             const response = fetchReviews(property.id, 0, 10);
             response.then((res) => {
                 if (res.status === 200) {
@@ -86,7 +89,11 @@ return (
         <Header />
         <div className="flex flex-col items-center min-h-screen bg-white-100">
 
-            <PropertyDetailsComponent property={property} booking={booking} setBooking={setBooking} />
+            <PropertyDetailsComponent
+                property={property}
+                booking={(!user || user.role === 'GUEST') ? booking : true}
+                setBooking={setBooking}
+            />
 
             {booking && <CreateBookingForm pricePerNight={property?.pricePerNight}
                                             propertyId={property?.id}

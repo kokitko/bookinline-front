@@ -9,7 +9,7 @@ const PrivateRoute = ({ children, allowedRoles = [] }) => {
     if (!user) return <Navigate to="/login" />;
 
     if (allowedRoles.length > 0 && !allowedRoles.includes(user.role)) {
-        return <div>403 Forbidden: Not enough rights.</div>;
+        return <Navigate to="/" />;
     }
 
     return children;
