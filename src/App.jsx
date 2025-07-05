@@ -15,6 +15,7 @@ import MyReviews from './pages/reviews/MyReviews.jsx';
 import CreateProperty from './pages/properties/CreateProperty.jsx';
 import MyProperties from './pages/properties/MyProperties.jsx';
 import EditProperty from './pages/properties/EditProperty.jsx';
+import HostBookings from './pages/bookings/HostBookings.jsx';
 
 function App() {
 
@@ -65,6 +66,11 @@ function App() {
           <Route path="/properties/edit/:id" element={
             <PrivateRoute>
               <EditProperty />
+            </PrivateRoute>
+          } />
+          <Route path="/bookings/host" element={
+            <PrivateRoute>
+              <HostBookings />
             </PrivateRoute>
           } />
         </Routes>

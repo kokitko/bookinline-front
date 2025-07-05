@@ -20,7 +20,7 @@ export const getBookedDates = async (propertyId) => {
     }
 }
 
-export const fetchMyBookings = async (page = 0, size = 10) => {
+export const fetchMyBookings = async (page, size) => {
     try {
         const response = await axiosInstance.get(`/bookings/user`, {
             params: { page, size }
@@ -48,3 +48,15 @@ export const cancelBooking = async (bookingId) => {
         throw error;
     }
 }
+
+export const fetchHostBookings = async (status, page, size) => {
+    try {
+        const response = await axiosInstance.get(`/bookings/host/${status}`, {
+            params: { page, size }
+        });
+        return response;
+    } catch (error) {
+        throw error;
+    }
+}
+
