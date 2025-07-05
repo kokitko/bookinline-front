@@ -60,3 +60,12 @@ export const fetchHostBookings = async (status, page, size) => {
     }
 }
 
+export const confirmBooking = async (bookingId) => {
+    try {
+        const response = await axiosInstance.put(`/bookings/${bookingId}/confirm`);
+        return response;
+    } catch (error) {
+        throw error;
+    }
+}
+

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { fetchBookingDetails, cancelBooking, confirmBooking } from '../api/bookings.js';
+import { fetchBookingDetails, cancelBooking } from '../api/bookings.js';
 import { fetchUserById } from '../api/users.js';
 import { useAuth } from '../auth/AuthContext';
 import { fetchHasReview } from '../api/reviews.js';
@@ -10,7 +10,7 @@ const BookingDetails = () => {
     const navigate = useNavigate();
     const { user } = useAuth();
     const [booking, setBooking] = useState(null);
-    const [otherUser, setOtherUser] = useState(null);
+    const [otherUser, setOtherUser] = useState(null); // Will be host or guest info depending on role
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
     const [showLeaveReview, setShowLeaveReview] = useState(false);
@@ -23,10 +23,13 @@ const BookingDetails = () => {
                 const response = await fetchBookingDetails(id);
                 if (response.data) {
                     setBooking(response.data);
+                    // Fetch other user info depending on current user role
                     if (user && user.role === 'HOST') {
+                        // Host sees guest info
                         const guestRes = await fetchUserById(response.data.guestId);
                         setOtherUser(guestRes.data);
                     } else if (user && user.role === 'GUEST') {
+                        // Guest sees host info
                         const hostRes = await fetchUserById(response.data.hostId);
                         setOtherUser(hostRes.data);
                     }
@@ -38,6 +41,7 @@ const BookingDetails = () => {
             }
         };
         getBookingDetails();
+        // eslint-disable-next-line
     }, [id, user]);
 
     useEffect(() => {
@@ -89,18 +93,11 @@ const BookingDetails = () => {
     const handleCancelBooking = () => {
         if (window.confirm('Are you sure you want to cancel this booking?')) {
             cancelBooking(booking.id).then(() => {
+                // Optionally refresh or redirect
                 window.location.reload();
             });
         }
     };
-
-    const handleConfirmBooking = () => {
-        if (window.confirm('Are you sure you want to confirm this booking?')) {
-            confirmBooking(booking.id).then(() => {
-                window.location.reload();
-            })
-        }
-    }
 
     const showCancelBooking =
         booking.status === 'PENDING' &&
@@ -108,12 +105,7 @@ const BookingDetails = () => {
         user.role === 'GUEST' &&
         booking.guestId === user.id;
 
-    const showConfirmBooking =
-        booking.status === 'PENDING' &&
-        user &&
-        user.role === 'HOST' &&
-        booking.hostId === user.id;
-
+    // Info block label and data depending on role
     let infoBlockTitle = '';
     let infoBlockData = null;
     if (user && user.role === 'GUEST') {
@@ -154,14 +146,6 @@ const BookingDetails = () => {
                         onClick={handleCancelBooking}
                     >
                         Cancel Booking
-                    </button>
-                )}
-                {showConfirmBooking && (
-                    <button
-                        className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition cursor-pointer"
-                        onClick={handleConfirmBooking}
-                    >
-                        Confirm Booking
                     </button>
                 )}
                 {showLeaveReview && (
