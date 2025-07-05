@@ -1,10 +1,13 @@
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { getAccessToken } from '../auth/authService.js';
+import { useAuth } from '*/auth/AuthContext.jsx';
 
 function Header() {
     const hasToken = !!getAccessToken();
     const [menuOpen, setMenuOpen] = useState(false);
+    const { user } = useAuth();
+    const role = user?.role || 'GUEST';
 
     return (
         <header className="bg-blue-700 text-white shadow-md">
@@ -15,8 +18,12 @@ function Header() {
                     </h1>
                     <nav className="hidden md:block">
                         <ul className="flex space-x-6 text-base">
-                            {hasToken && <li><Link to="/bookings" className="hover:underline">My Bookings</Link></li>}
-                            {hasToken && <li><Link to="/my-reviews" className="hover:underline">My Reviews</Link></li>}
+
+                            {hasToken && role === 'GUEST' && <li><Link to="/bookings" className="hover:underline">My Bookings</Link></li>}
+                            {hasToken && role === 'GUEST' && <li><Link to="/my-reviews" className="hover:underline">My Reviews</Link></li>}
+
+                            {hasToken && role === 'HOST' && <li><Link to="/properties/list" className="hover:underline">My Properties</Link></li>}
+
                             <li><Link to="/" className="hover:underline">About</Link></li>
                         </ul>
                     </nav>
@@ -51,8 +58,8 @@ function Header() {
                 <div className="md:hidden px-4 pb-4">
                     <nav>
                         <ul className="flex flex-col space-y-2 text-base">
-                            {hasToken && <li><Link to="/bookings" className="hover:underline">My Bookings</Link></li>}
-                            {hasToken && <li><Link to="/my-reviews" className="hover:underline">My Reviews</Link></li>}
+                            {hasToken && role === 'GUEST' && <li><Link to="/bookings" className="hover:underline">My Bookings</Link></li>}
+                            {hasToken && role === 'GUEST' && <li><Link to="/my-reviews" className="hover:underline">My Reviews</Link></li>}
                             <li><Link to="/" className="hover:underline">About</Link></li>
                         </ul>
                     </nav>

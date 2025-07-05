@@ -18,6 +18,11 @@ export const fetchPropertyDetails = (propertyId) => {
     return response;
 }
 
+export const fetchMyProperties = (page, size) => {
+    const response = axiosInstance.get(`/properties/host?page=${page}&size=${size}`);
+    return response;
+}
+
 export const fetchCreateProperty = (propertyData, images = []) => {
     const formData = new FormData();
     formData.append('property', JSON.stringify(propertyData));

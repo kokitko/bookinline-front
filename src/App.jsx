@@ -13,6 +13,7 @@ import Booking from './pages/bookings/Booking.jsx';
 import LeaveReview from './pages/reviews/LeaveReview.jsx';
 import MyReviews from './pages/reviews/MyReviews.jsx';
 import CreateProperty from './pages/properties/CreateProperty.jsx';
+import MyProperties from './pages/properties/MyProperties.jsx';
 
 function App() {
 
@@ -53,6 +54,11 @@ function App() {
           <Route path="/property/create" element={
             <PrivateRoute>
               <CreateProperty />
+            </PrivateRoute>
+          } />
+          <Route path="/properties/list" element={
+            <PrivateRoute>
+              <MyProperties />
             </PrivateRoute>
           } />
         </Routes>
