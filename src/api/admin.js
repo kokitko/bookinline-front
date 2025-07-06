@@ -94,3 +94,34 @@ export const changePropertyAvailability = async (propertyId) => {
         throw error;
     }
 }
+
+export const fetchAllBookings = async (page, size) => {
+    try {
+        const response = await axiosInstance.get('/admin/bookings', {
+            params: { page, size }
+        });
+        return response;
+    } catch (error) {
+        throw error;
+    }
+}
+
+export const fetchBookingsByStatus = async (status, page, size) => {
+    try {
+        const response = await axiosInstance.get(`/admin/bookings/status/${status}`, {
+            params: { page, size }
+        });
+        return response;
+    } catch (error) {
+        throw error;
+    }
+}
+
+export const cancelBooking = async (bookingId) => {
+    try {
+        const response = await axiosInstance.delete(`/admin/booking/${bookingId}`);
+        return response;
+    } catch (error) {
+        throw error;
+    }
+}
