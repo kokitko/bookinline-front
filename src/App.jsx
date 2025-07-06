@@ -18,6 +18,8 @@ import CreateProperty from './pages/properties/CreateProperty.jsx';
 import MyProperties from './pages/properties/MyProperties.jsx';
 import EditProperty from './pages/properties/EditProperty.jsx';
 import HostBookings from './pages/bookings/HostBookings.jsx';
+import AdminDashboard from './pages/admin/AdminDashboard.jsx';
+import UsersManagement from './pages/admin/UsersManagement.jsx';
 
 function App() {
 
@@ -33,7 +35,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/profile" element={
-            <PrivateRoute allowedRoles={['GUEST', 'HOST']}>
+            <PrivateRoute>
               <Profile />
             </PrivateRoute>
           } />
@@ -75,6 +77,16 @@ function App() {
           <Route path="/bookings/host" element={
             <PrivateRoute allowedRoles={['HOST']}>
               <HostBookings />
+            </PrivateRoute>
+          } />
+          <Route path="/admin" element={
+            <PrivateRoute allowedRoles={['ADMIN']}>
+              <AdminDashboard />
+            </PrivateRoute>
+          } />
+          <Route path="/admin/users" element={
+            <PrivateRoute allowedRoles={['ADMIN']}>
+              <UsersManagement />
             </PrivateRoute>
           } />
         </Routes>

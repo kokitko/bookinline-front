@@ -25,6 +25,8 @@ function Header() {
                             {hasToken && role === 'HOST' && <li><Link to="/properties/list" className="hover:underline">My Properties</Link></li>}
                             {hasToken && role === 'HOST' && <li><Link to="/bookings/host" className="hover:underline">Host Bookings</Link></li>}
 
+                            {hasToken && role === 'ADMIN' && <li><Link to="/admin" className="hover:underline">Admin Dashboard</Link></li>}
+
                             <li><Link to="/about" className="hover:underline">About</Link></li>
                         </ul>
                     </nav>
