@@ -1,6 +1,7 @@
 
 import { fetchUsers, fetchUsersByStatus } from '../api/admin.js';
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const STATUSES = ['ALL', 'ACTIVE', 'WARNED', 'BANNED'];
 
@@ -11,6 +12,7 @@ function UserManagementContent() {
     const [size] = useState(10);
     const [totalPages, setTotalPages] = useState(0);
     const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
 
     const fetchData = async () => {
         setLoading(true);
@@ -32,7 +34,6 @@ function UserManagementContent() {
 
     useEffect(() => {
         fetchData();
-        // eslint-disable-next-line
     }, [status, page]);
 
     const handleStatusChange = (e) => {
@@ -110,8 +111,8 @@ function UserManagementContent() {
                                     <td className="py-2 px-3 border-b">{user.role}</td>
                                     <td className="py-2 px-3 border-b">
                                         <button
-                                            className="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 transition"
-                                            onClick={() => alert(`View details for user ${user.id}`)}
+                                            className="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 transition cursor-pointer"
+                                            onClick={() => navigate(`/admin/users/${user.id}`)}
                                         >
                                             View Details
                                         </button>
@@ -124,7 +125,7 @@ function UserManagementContent() {
             </div>
             <div className="flex items-center justify-between mt-4">
                 <button
-                    className="px-4 py-2 bg-gray-200 rounded disabled:opacity-50"
+                    className="px-4 py-2 bg-gray-200 rounded disabled:opacity-50 cursor-pointer"
                     onClick={handlePrev}
                     disabled={page === 0}
                 >
@@ -134,7 +135,7 @@ function UserManagementContent() {
                     Page {page + 1} of {totalPages}
                 </span>
                 <button
-                    className="px-4 py-2 bg-gray-200 rounded disabled:opacity-50"
+                    className="px-4 py-2 bg-gray-200 rounded disabled:opacity-50 cursor-pointer"
                     onClick={handleNext}
                     disabled={page + 1 >= totalPages}
                 >
