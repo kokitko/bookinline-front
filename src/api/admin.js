@@ -60,3 +60,37 @@ export const fetchUserDetails = async (userId) => {
         throw error;
     }
 }
+
+export const fetchAllProperties = async (page, size) => {
+    try {
+        const response = await axiosInstance.get('/admin/properties', {
+            params: { page, size }
+        });
+        console.log("Response from fetchAllProperties:", response);
+        return response;
+    } catch (error) {
+        throw error;
+    }
+}
+
+export const fetchPropertiesByType = async (type, page, size) => {
+    try {
+        const response = await axiosInstance.get(`/admin/properties/type/${type}`, {
+            params: { page, size }
+        });
+        return response;
+    } catch (error) {
+        throw error;
+    }
+}
+
+export const changePropertyAvailability = async (propertyId) => {
+    try {
+        console.log(`Changing availability for property ID: ${propertyId}`);
+        const response = await axiosInstance.put(`/admin/property/${propertyId}`);
+        console.log("Response from property availability change:", response);
+        return response;
+    } catch (error) {
+        throw error;
+    }
+}

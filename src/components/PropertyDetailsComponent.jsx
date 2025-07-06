@@ -108,7 +108,7 @@ function PropertyDetailsComponent({ property, booking, setBooking }) {
                             <span className="flex items-center gap-1 text-yellow-500 font-medium">
                                 ★ {(property.averageRating > 0) ? property.averageRating : "N/A"}
                             </span>
-                            {!booking && <button onClick={handleBookNow} 
+                            {!booking && property.available && <button onClick={handleBookNow} 
                                 className="ml-auto bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition cursor-pointer">
                                 Book Now
                             </button>}

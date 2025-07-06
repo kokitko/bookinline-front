@@ -21,6 +21,7 @@ import HostBookings from './pages/bookings/HostBookings.jsx';
 import AdminDashboard from './pages/admin/AdminDashboard.jsx';
 import UsersManagement from './pages/admin/UsersManagement.jsx';
 import UserDetailsAdmin from './pages/admin/UserDetailsAdmin.jsx';
+import PropertiesManagement from './pages/admin/PropertiesManagement.jsx';
 
 function App() {
 
@@ -93,6 +94,11 @@ function App() {
           <Route path="/admin/users/:userId" element={
             <PrivateRoute allowedRoles={['ADMIN']}>
               <UserDetailsAdmin />
+            </PrivateRoute>
+          } />
+          <Route path="/admin/properties" element={
+            <PrivateRoute allowedRoles={['ADMIN']}>
+              <PropertiesManagement />
             </PrivateRoute>
           } />
         </Routes>
