@@ -23,6 +23,7 @@ import UsersManagement from './pages/admin/UsersManagement.jsx';
 import UserDetailsAdmin from './pages/admin/UserDetailsAdmin.jsx';
 import PropertiesManagement from './pages/admin/PropertiesManagement.jsx';
 import BookingsManagement from './pages/admin/BookingsManagement.jsx';
+import ReviewsManagement from './pages/admin/ReviewsManagement.jsx';
 
 function App() {
 
@@ -105,6 +106,11 @@ function App() {
           <Route path="/admin/bookings" element={
             <PrivateRoute allowedRoles={['ADMIN']}>
               <BookingsManagement />
+            </PrivateRoute>
+          } />
+          <Route path="/admin/reviews" element={
+            <PrivateRoute allowedRoles={['ADMIN']}>
+              <ReviewsManagement />
             </PrivateRoute>
           } />
         </Routes>

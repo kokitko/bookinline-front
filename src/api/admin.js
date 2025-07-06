@@ -125,3 +125,23 @@ export const cancelBooking = async (bookingId) => {
         throw error;
     }
 }
+
+export const fetchAllReviews = async (page, size) => {
+    try {
+        const response = await axiosInstance.get('/admin/reviews', {
+            params: { page, size }
+        });
+        return response;
+    } catch (error) {
+        throw error;
+    }
+}
+
+export const deleteReview = async (reviewId) => {
+    try {
+        const response = await axiosInstance.delete(`/admin/review/${reviewId}`);
+        return response;
+    } catch (error) {
+        throw error;
+    }
+}

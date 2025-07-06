@@ -69,3 +69,14 @@ export const confirmBooking = async (bookingId) => {
     }
 }
 
+export const fetchGuestBookingsByStatus = async (status, page, size) => {
+    try {
+        const response = await axiosInstance.get(`/bookings/guest/${status}`, {
+            params: { page, size }
+        });
+        return response;
+    } catch (error) {
+        throw error;
+    }
+}
+
