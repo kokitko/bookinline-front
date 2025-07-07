@@ -2,7 +2,7 @@ import axiosInstance from "./axiosInstance";
 
 export const createBooking = async (bookingData, propertyId) => {
     try {
-        const response = await axiosInstance.post(`/bookings/property/${propertyId}`, bookingData);
+        const response = await axiosInstance.post(`/bookings/property/${propertyId}/book`, bookingData);
         console.log("Response from booking creation:", response);
         return response;
     } catch (error) {
@@ -42,7 +42,7 @@ export const fetchBookingDetails = async (bookingId) => {
 
 export const cancelBooking = async (bookingId) => {
     try {
-        const response = await axiosInstance.delete(`/bookings/${bookingId}`);
+        const response = await axiosInstance.delete(`/bookings/${bookingId}/cancel`);
         return response;
     } catch (error) {
         throw error;

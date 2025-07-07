@@ -19,7 +19,7 @@ export const fetchHasReview = async (propertyId) => {
 export const fetchLeaveReview = async (propertyId, info) => {
     try {
         console.log('Submitting review for property:', propertyId, 'with info:', info);
-        return await axiosInstance.post(`/reviews/property/${propertyId}`, info);
+        return await axiosInstance.post(`/reviews/property/${propertyId}/review`, info);
     } catch (error) {
         throw error;
     }

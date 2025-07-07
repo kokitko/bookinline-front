@@ -18,8 +18,8 @@ const propertyTypes = [
 
 const sortOptions = [
     { value: "", label: "Default" },
-    { value: "price", label: "Price" },
-    { value: "rating", label: "Rating" },
+    { value: "pricePerNight", label: "Price" },
+    { value: "averageRating", label: "Rating" },
 ];
 
 const sortOrderOptions = [
