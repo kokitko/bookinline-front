@@ -1,10 +1,9 @@
-import axios from './axiosInstance.js';
+import axiosInstance from './axiosInstance.js';
 import { getAccessToken } from '../auth/authService.js';
 
 export async function fetchUserDetails() {
     try {
-        const accessToken = getAccessToken();
-        const res = await axios.get('/user/me');
+        const res = await axiosInstance.get('/user/me');
         if (res.status !== 200) {
             throw new Error('Failed to fetch user details');
         }
@@ -16,8 +15,7 @@ export async function fetchUserDetails() {
 
 export async function updateUserEmail(userData) {
     try {
-        const accessToken = getAccessToken();
-        const res = await axios.put('/user/email', userData);
+        const res = await axiosInstance.put('/user/email', userData);
         if (res.status !== 200) {
             throw new Error('Failed to update user details');
         }
@@ -29,8 +27,7 @@ export async function updateUserEmail(userData) {
 
 export async function updateUserPassword(userData) {
     try {
-        const accessToken = getAccessToken();
-        const res = await axios.put('/user/password', userData);
+        const res = await axiosInstance.put('/user/password', userData);
         if (res.status !== 200) {
             throw new Error('Failed to update user password');
         }
@@ -42,8 +39,7 @@ export async function updateUserPassword(userData) {
 
 export async function updateUserPhoneNumber(userData) {
     try {
-        const accessToken = getAccessToken();
-        const res = await axios.put('/user/phone', userData);
+        const res = await axiosInstance.put('/user/phone', userData);
         if (res.status !== 200) {
             throw new Error('Failed to update user phone number');
         }
@@ -56,7 +52,14 @@ export async function updateUserPhoneNumber(userData) {
 export async function deleteUserAccount(passwordData) {
     try {
         const accessToken = getAccessToken();
-        const res = await axios.delete('/user', passwordData);
+        const res = await axiosInstance.delete('/user', {
+            data: passwordData,
+            Authorization: `Bearer ${accessToken}`,
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            withCredentials: true
+        });
         if (res.status !== 204) {
             throw new Error('Failed to delete user account');
         }
@@ -68,7 +71,7 @@ export async function deleteUserAccount(passwordData) {
 
 export async function fetchUserById(userId) {
     try {
-        const res = await axios.get(`/user/${userId}`);
+        const res = await axiosInstance.get(`/user/${userId}`);
         if (res.status !== 200) {
             throw new Error('Failed to fetch user by ID');
         }

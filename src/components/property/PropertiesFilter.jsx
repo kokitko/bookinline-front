@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import BookingDates from "./BookingDates.jsx";
+import BookingDates from "*/components/booking/BookingDates.jsx";
 
 const propertyTypes = [
     { value: "", label: "Any" },

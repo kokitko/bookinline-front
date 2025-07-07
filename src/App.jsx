@@ -1,29 +1,29 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import PrivateRoute from './routes/PrivateRoute.jsx';
-import { AuthProvider } from './auth/AuthContext.jsx';
+import PrivateRoute from '*/routes/PrivateRoute.jsx';
+import { AuthProvider } from '*/auth/AuthContext.jsx';
 
-import LostPage from './pages/LostPage.jsx';
-import Home from './pages/home/Home.jsx';
-import About from './pages/home/About.jsx';
-import PropertyList from './pages/properties/PropertyList.jsx';
-import PropertyDetails from './pages/properties/PropertyDetails.jsx';
-import Register from './pages/auth/Register.jsx';
-import Login from './pages/auth/Login.jsx';
-import Profile from './pages/profiles/Profile.jsx';
-import MyBookings from './pages/bookings/MyBookings.jsx';
-import Booking from './pages/bookings/Booking.jsx';
-import LeaveReview from './pages/reviews/LeaveReview.jsx';
-import MyReviews from './pages/reviews/MyReviews.jsx';
-import CreateProperty from './pages/properties/CreateProperty.jsx';
-import MyProperties from './pages/properties/MyProperties.jsx';
-import EditProperty from './pages/properties/EditProperty.jsx';
-import HostBookings from './pages/bookings/HostBookings.jsx';
-import AdminDashboard from './pages/admin/AdminDashboard.jsx';
-import UsersManagement from './pages/admin/UsersManagement.jsx';
-import UserDetailsAdmin from './pages/admin/UserDetailsAdmin.jsx';
-import PropertiesManagement from './pages/admin/PropertiesManagement.jsx';
-import BookingsManagement from './pages/admin/BookingsManagement.jsx';
-import ReviewsManagement from './pages/admin/ReviewsManagement.jsx';
+import LostPage from '*/pages/LostPage.jsx';
+import Home from '*/pages/home/Home.jsx';
+import About from '*/pages/home/About.jsx';
+import PropertyList from '*/pages/properties/PropertyList.jsx';
+import PropertyDetails from '*/pages/properties/PropertyDetails.jsx';
+import Register from '*/pages/auth/Register.jsx';
+import Login from '*/pages/auth/Login.jsx';
+import Profile from '*/pages/profiles/Profile.jsx';
+import MyBookings from '*/pages/bookings/MyBookings.jsx';
+import Booking from '*/pages/bookings/Booking.jsx';
+import LeaveReview from '*/pages/reviews/LeaveReview.jsx';
+import MyReviews from '*/pages/reviews/MyReviews.jsx';
+import CreateProperty from '*/pages/properties/CreateProperty.jsx';
+import MyProperties from '*/pages/properties/MyProperties.jsx';
+import EditProperty from '*/pages/properties/EditProperty.jsx';
+import HostBookings from '*/pages/bookings/HostBookings.jsx';
+import AdminDashboard from '*/pages/admin/AdminDashboard.jsx';
+import UsersManagement from '*/pages/admin/UsersManagement.jsx';
+import UserDetailsAdmin from '*/pages/admin/UserDetailsAdmin.jsx';
+import PropertiesManagement from '*/pages/admin/PropertiesManagement.jsx';
+import BookingsManagement from '*/pages/admin/BookingsManagement.jsx';
+import ReviewsManagement from '*/pages/admin/ReviewsManagement.jsx';
 
 function App() {
 

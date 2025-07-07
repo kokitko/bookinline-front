@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { getAccessToken } from '../auth/authService.js';
+import { getAccessToken } from '*/auth/authService.js';
 import { useAuth } from '*/auth/AuthContext.jsx';
 
 function Header() {

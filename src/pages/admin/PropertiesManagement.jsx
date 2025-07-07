@@ -1,6 +1,6 @@
 
 import Header from '*/components/Header';
-import PropertiesManagementContent from '*/components/PropertiesManagementContent';
+import PropertiesManagementContent from '*/components/admin/PropertiesManagementContent';
 import Footer from '*/components/Footer';
 
 function PropertiesManagement() {

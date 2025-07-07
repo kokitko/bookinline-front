@@ -1,11 +1,11 @@
 import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { fetchProperties, fetchFilteredProperties } from '*/api/properties.js';
-import PropertiesFilter from '*/components/PropertiesFilter.jsx';
+import PropertiesFilter from '*/components/property/PropertiesFilter.jsx';
 
 import Header from '*/components/Header';
 import Footer from '*/components/Footer';
-import PropertyCard from '*/components/PropertyCard.jsx';
+import PropertyCard from '*/components/property/PropertyCard.jsx';
 
 function PropertyList() {
     const location = useLocation();

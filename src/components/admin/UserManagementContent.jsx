@@ -1,5 +1,5 @@
 
-import { fetchUsers, fetchUsersByStatus } from '../api/admin.js';
+import { fetchUsers, fetchUsersByStatus } from '*/api/admin.js';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 

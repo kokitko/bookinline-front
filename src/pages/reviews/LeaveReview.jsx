@@ -6,8 +6,8 @@ import { fetchPropertyDetails } from '*/api/properties.js';
 import { fetchHasReview } from '*/api/reviews.js';
 
 import Header from '*/components/Header';
-import PropertyDetailsComponent from '*/components/PropertyDetailsComponent';
-import LeaveReviewForm from '*/components/LeaveReviewForm';
+import PropertyDetailsComponent from '*/components/property/PropertyDetailsComponent';
+import LeaveReviewForm from '*/components/review/LeaveReviewForm';
 import Footer from '*/components/Footer';
 
 function LeaveReview() {

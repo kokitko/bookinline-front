@@ -2,16 +2,16 @@ import React, { useEffect, useState } from 'react';
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
 
-import ImageCard from './ImageCard.jsx';
-import krakowImage from '../assets/krakow.jpg';
-import warsawImage from '../assets/warsaw.jpg';
-import houseImage from '../assets/house.jpg';
-import apartmentImage from '../assets/apartment.jpg';
-import villaImage from '../assets/villa.jpg';
-import loftImage from '../assets/loft.jpg';
+import ImageCard from '*/components/ImageCard.jsx';
+import krakowImage from '*/assets/krakow.jpg';
+import warsawImage from '*/assets/warsaw.jpg';
+import houseImage from '*/assets/house.jpg';
+import apartmentImage from '*/assets/apartment.jpg';
+import villaImage from '*/assets/villa.jpg';
+import loftImage from '*/assets/loft.jpg';
 import { useNavigate } from 'react-router-dom';
 
-import BookingDates from './BookingDates.jsx';
+import BookingDates from '*/components/booking/BookingDates.jsx';
 
 function BookingForm() {
     const [showCalendar, setShowCalendar] = useState(false);

@@ -1,6 +1,6 @@
 
 import Header from '*/components/Header';
-import CreatePropertyForm from '*/components/CreatePropertyForm';
+import CreatePropertyForm from '*/components/property/CreatePropertyForm';
 import Footer from '*/components/Footer';
 
 function CreateProperty() {

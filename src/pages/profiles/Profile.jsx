@@ -1,6 +1,6 @@
 
 import Header from '*/components/Header';
-import ProfileContent from '*/components/ProfileContent';
+import ProfileContent from '*/components/user/ProfileContent';
 import Footer from '*/components/Footer';
 
 function Profile() {

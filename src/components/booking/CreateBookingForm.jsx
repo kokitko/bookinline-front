@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import BookingDates from "./BookingDates.jsx";
-import { useAuth } from "../auth/AuthContext.jsx";
-import { createBooking, getBookedDates } from "../api/bookings.js";
+import BookingDates from "*/components/booking/BookingDates.jsx";
+import { useAuth } from "*/auth/AuthContext.jsx";
+import { createBooking, getBookedDates } from "*/api/bookings.js";
 import { useNavigate } from "react-router-dom";
 
 

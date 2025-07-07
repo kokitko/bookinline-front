@@ -1,37 +1,45 @@
 import React, { useEffect, useState } from "react";
-import { fetchHostBookings } from "../api/bookings.js";
+import { fetchMyBookings, fetchGuestBookingsByStatus } from "*/api/bookings.js";
 import { useNavigate } from "react-router-dom";
 
 const PAGE_SIZE = 10;
 const STATUS_OPTIONS = [
-    { value: "any", label: "Any" },
-    { value: "pending", label: "Pending" },
-    { value: "confirmed", label: "Confirmed" },
-    { value: "cancelled", label: "Cancelled" },
-    { value: "checked_out", label: "Checked Out" },
+    { value: "", label: "All" },
+    { value: "PENDING", label: "Pending" },
+    { value: "CONFIRMED", label: "Confirmed" },
+    { value: "CANCELLED", label: "Cancelled" },
+    { value: "CHECKED_OUT", label: "Checked Out" },
 ];
 
-export default function HostBookingsList() {
+export default function MyBookingsList() {
     const [bookings, setBookings] = useState([]);
     const [page, setPage] = useState(0);
     const [totalPages, setTotalPages] = useState(0);
     const [loading, setLoading] = useState(false);
-    const [status, setStatus] = useState("any");
+    const [status, setStatus] = useState("");
     const navigate = useNavigate();
 
     useEffect(() => {
         setLoading(true);
-        fetchHostBookings(status, page, PAGE_SIZE)
+        const fetchFn = status
+            ? fetchGuestBookingsByStatus(status, page, PAGE_SIZE)
+            : fetchMyBookings(page, PAGE_SIZE);
+        fetchFn
             .then((res) => {
                 setBookings(res.data.bookings);
                 setTotalPages(res.data.totalPages);
             })
             .finally(() => setLoading(false));
-    }, [status, page]);
+    }, [page, status]);
+
+    const handleStatusChange = (e) => {
+        setStatus(e.target.value);
+        setPage(0);
+    };
 
     return (
         <div className="max-w-3xl mx-auto p-6">
-            <h1 className="text-2xl font-bold mb-6">Host Bookings</h1>
+            <h1 className="text-2xl font-bold mb-6">My Bookings</h1>
             <div className="mb-6 flex flex-col md:flex-row md:items-center gap-3">
                 <label className="font-semibold text-gray-700" htmlFor="status-select">
                     Booking Status:
@@ -39,10 +47,7 @@ export default function HostBookingsList() {
                 <select
                     id="status-select"
                     value={status}
-                    onChange={e => {
-                        setStatus(e.target.value);
-                        setPage(0);
-                    }}
+                    onChange={handleStatusChange}
                     className="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
                 >
                     {STATUS_OPTIONS.map(opt => (
@@ -67,9 +72,6 @@ export default function HostBookingsList() {
                                     <span className="font-medium">Check-in:</span> {booking.checkInDate}
                                     <span className="mx-2">|</span>
                                     <span className="font-medium">Check-out:</span> {booking.checkOutDate}
-                                </div>
-                                <div className="text-gray-600">
-                                    <span className="font-medium">Guest:</span> {booking.guestName}
                                 </div>
                                 <div className="text-gray-500 text-sm mt-1">
                                     Status: <span className="font-semibold">{booking.status}</span>

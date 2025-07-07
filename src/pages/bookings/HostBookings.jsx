@@ -1,6 +1,6 @@
 
 import Header from "*/components/Header.jsx";
-import HostBookingsList from "*/components/HostBookingsList.jsx";
+import HostBookingsList from "*/components/booking/HostBookingsList.jsx";
 import Footer from "*/components/Footer.jsx";
 
 function HostBookings() {

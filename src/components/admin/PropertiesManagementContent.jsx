@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { fetchAllProperties, fetchPropertiesByType, changePropertyAvailability } from '../api/admin.js';
-import { fetchImage } from '../api/images.js';
+import { fetchAllProperties, fetchPropertiesByType, changePropertyAvailability } from '*/api/admin.js';
+import { fetchImage } from '*/api/images.js';
 import { useNavigate } from "react-router-dom";
 
 const PROPERTY_TYPES = [

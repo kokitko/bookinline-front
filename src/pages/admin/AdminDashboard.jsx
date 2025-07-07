@@ -1,6 +1,6 @@
 
 import Header from "*/components/Header";
-import AdminDashboardContent from "*/components/AdminDashboardContent";
+import AdminDashboardContent from "*/components/admin/AdminDashboardContent";
 import Footer from "*/components/Footer";
 
 function AdminDashboard() {

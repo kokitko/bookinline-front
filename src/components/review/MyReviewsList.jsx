@@ -1,9 +1,9 @@
-import { fetchUserReviews } from '../api/reviews.js';
+import { fetchUserReviews } from '*/api/reviews.js';
 import { useState, useEffect } from 'react';
-import { useAuth } from '../auth/AuthContext.jsx';
-import { fetchPropertyDetails } from '../api/properties.js';
-import { fetchDeleteReview } from '../api/reviews.js';
-import PropertyCard from './PropertyCard.jsx';
+import { useAuth } from '*/auth/AuthContext.jsx';
+import { fetchPropertyDetails } from '*/api/properties.js';
+import { fetchDeleteReview } from '*/api/reviews.js';
+import PropertyCard from '*/components/property/PropertyCard.jsx';
 
 function MyReviewsList() {
     const { user } = useAuth();

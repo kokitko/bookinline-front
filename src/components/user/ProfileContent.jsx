@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { useAuth } from "../auth/AuthContext";
-import { logout } from "../auth/authService";
+import { useAuth } from "*/auth/AuthContext";
+import { logout } from "*/auth/authService";
 import { useNavigate } from "react-router-dom";
 import { updateUserEmail,
         updateUserPhoneNumber,

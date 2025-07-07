@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { fetchCreateProperty } from "../api/properties.js";
+import { fetchCreateProperty } from "*/api/properties.js";
 
 const initialState = {
     title: "",

@@ -1,6 +1,6 @@
 
 import Header from '*/components/Header';
-import UserDetailsAdminContent from '*/components/UserDetailsAdminContent';
+import UserDetailsAdminContent from '*/components/admin/UserDetailsAdminContent';
 import Footer from '*/components/Footer';
 
 function UserDetailsAdmin() {

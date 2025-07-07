@@ -1,6 +1,6 @@
 
-import { fetchMyProperties, fetchDeleteProperty } from "../api/properties.js";
-import { fetchImage } from "../api/images.js";
+import { fetchMyProperties, fetchDeleteProperty } from "*/api/properties.js";
+import { fetchImage } from "*/api/images.js";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";

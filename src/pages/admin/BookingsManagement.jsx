@@ -1,6 +1,6 @@
 
 import Header from '*/components/Header';
-import BookingsManagementContent from '*/components/BookingsManagementContent';
+import BookingsManagementContent from '*/components/admin/BookingsManagementContent';
 import Footer from '*/components/Footer';
 
 function BookingsManagement() {

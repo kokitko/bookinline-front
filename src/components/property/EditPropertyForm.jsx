@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { fetchEditProperty, fetchPropertyDetails } from "../api/properties.js";
+import { fetchEditProperty, fetchPropertyDetails } from "*/api/properties.js";
 
 const initialState = {
     title: "",

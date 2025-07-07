@@ -1,6 +1,6 @@
 
 import Header from '*/components/Header';
-import MyReviewsList from '*/components/MyReviewsList';
+import MyReviewsList from '*/components/review/MyReviewsList';
 import Footer from '*/components/Footer';
 
 function MyReviews() {

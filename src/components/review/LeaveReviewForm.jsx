@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { fetchLeaveReview } from '../api/reviews.js';
+import { fetchLeaveReview } from '*/api/reviews.js';
 import { useNavigate } from 'react-router-dom';
 
 const Star = ({ filled, onClick, onMouseEnter, onMouseLeave }) => (

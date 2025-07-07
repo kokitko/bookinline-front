@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { fetchBookingDetails, cancelBooking, confirmBooking } from '../api/bookings.js';
-import { fetchUserById } from '../api/users.js';
-import { useAuth } from '../auth/AuthContext';
-import { fetchHasReview } from '../api/reviews.js';
+import { fetchBookingDetails, cancelBooking, confirmBooking } from '*/api/bookings.js';
+import { fetchUserById } from '*/api/users.js';
+import { useAuth } from '*/auth/AuthContext.jsx';
+import { fetchHasReview } from '*/api/reviews.js';
 
 const BookingDetails = () => {
     const { id } = useParams();

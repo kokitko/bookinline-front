@@ -1,18 +1,15 @@
-import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { register } from '../auth/authService.js'; 
-import React, { useState } from 'react';
-import { useAuth } from '../auth/AuthContext.jsx';
+import React, { useState, useEffect } from 'react';
+import { useAuth } from '*/auth/AuthContext.jsx';
+
+import { login } from '*/auth/authService.js';
 
 const initialState = {
-    fullName: '',
     email: '',
     password: '',
-    repeatPassword: '',
-    role: 'GUEST',
 };
 
-function RegisterForm() {
+function LoginForm() {
     const [userData, setUserData] = useState(initialState);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
@@ -33,18 +30,8 @@ function RegisterForm() {
         setLoading(true);
         setError('');
         setSuccess(false);
-
-        if (userData.password !== userData.repeatPassword) {
-            setError('Passwords do not match.');
-            setLoading(false);
-            return;
-        }
-
         try {
-            const res = await register({
-                ...userData,
-                repeatPassword: undefined
-            });
+            const res = await login(userData);
             const data = res.data;
             if (res.status === 200 && data.accessToken) {
                 setSuccess(true);
@@ -52,10 +39,10 @@ function RegisterForm() {
                 await fetchUser();
                 navigate('/');
             } else {
-                setError('Registration failed.');
+                setError('Invalid credentials. Please try again.');
             }
         } catch (err) {
-            setError(err.message || 'Registration failed.');
+            setError(err.message || 'Login failed.');
         } finally {
             setLoading(false);
         }
@@ -70,19 +57,8 @@ function RegisterForm() {
 
     return (
         <div className="max-w-md mx-auto mt-10 p-6 rounded-lg shadow-lg bg-white">
-            <h2 className="text-2xl font-bold mb-6 text-center">Register</h2>
+            <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
             <form onSubmit={handleSubmit}>
-                <div className="mb-4">
-                    <label className="block mb-2 font-medium">Full Name</label>
-                    <input
-                        type="text"
-                        name="fullName"
-                        value={userData.fullName}
-                        onChange={handleChange}
-                        required
-                        className="w-full px-3 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400"
-                    />
-                </div>
                 <div className="mb-4">
                     <label className="block mb-2 font-medium">Email</label>
                     <input
@@ -105,31 +81,8 @@ function RegisterForm() {
                         className="w-full px-3 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400"
                     />
                 </div>
-                <div className="mb-4">
-                    <label className="block mb-2 font-medium">Repeat Password</label>
-                    <input
-                        type="password"
-                        name="repeatPassword"
-                        value={userData.repeatPassword}
-                        onChange={handleChange}
-                        required
-                        className="w-full px-3 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400"
-                    />
-                </div>
-                <div className="mb-6">
-                    <label className="block mb-2 font-medium">Role</label>
-                    <select
-                        name="role"
-                        value={userData.role}
-                        onChange={handleChange}
-                        className="w-full px-3 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400"
-                    >
-                        <option value="GUEST">Guest</option>
-                        <option value="HOST">Host</option>
-                    </select>
-                </div>
                 {error && <div className="text-red-600 mb-3">{error}</div>}
-                {success && <div className="text-green-600 mb-3">Registration successful!</div>}
+                {success && <div className="text-green-600 mb-3">Login successful!</div>}
                 <button
                     type="submit"
                     disabled={loading}
@@ -139,11 +92,11 @@ function RegisterForm() {
                             : 'bg-blue-600 hover:bg-blue-700 cursor-pointer'
                     }`}
                 >
-                    {loading ? 'Registering...' : 'Register'}
+                    {loading ? 'Logging in...' : 'Login'}
                 </button>
             </form>
         </div>
     );
 }
 
-export default RegisterForm;
+export default LoginForm;

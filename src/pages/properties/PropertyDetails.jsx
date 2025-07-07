@@ -6,9 +6,9 @@ import { fetchReviews } from '*/api/reviews.js';
 
 import Header from '*/components/Header';
 import Footer from '*/components/Footer';
-import PropertyDetailsComponent from '*/components/PropertyDetailsComponent.jsx';
+import PropertyDetailsComponent from '*/components/property/PropertyDetailsComponent.jsx';
 
-import CreateBookingForm from '*/components/CreateBookingForm.jsx';
+import CreateBookingForm from '*/components/booking/CreateBookingForm.jsx';
 
 function PropertyDetails() {
     const { id } = useParams();
