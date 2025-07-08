@@ -66,7 +66,6 @@ export const fetchAllProperties = async (page, size) => {
         const response = await axiosInstance.get('/admin/properties', {
             params: { page, size }
         });
-        console.log("Response from fetchAllProperties:", response);
         return response;
     } catch (error) {
         throw error;
@@ -86,9 +85,7 @@ export const fetchPropertiesByType = async (type, page, size) => {
 
 export const changePropertyAvailability = async (propertyId) => {
     try {
-        console.log(`Changing availability for property ID: ${propertyId}`);
         const response = await axiosInstance.put(`/admin/property/${propertyId}`);
-        console.log("Response from property availability change:", response);
         return response;
     } catch (error) {
         throw error;

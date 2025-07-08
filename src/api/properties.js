@@ -7,9 +7,7 @@ export const fetchProperties = (page, size) => {
 
 export const fetchFilteredProperties = (filter, page, size) => {
     const response = axiosInstance.post(
-        `/properties/filter?page=${page}&size=${size}`,
-        filter
-    );
+        `/properties/filter?page=${page}&size=${size}`, filter);
     return response;
 }
 

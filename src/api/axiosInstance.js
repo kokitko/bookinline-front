@@ -17,6 +17,12 @@ axiosInstance.interceptors.request.use(
         if (token) {
             config.headers['Authorization'] = `Bearer ${token}`;
         }
+        if (config.method === 'post' || config.method === 'put' || config.method === 'delete') {
+            const xsrfToken = getXsrfToken();
+            if (xsrfToken) {
+                config.headers['X-XSRF-TOKEN'] = xsrfToken;
+            }
+        }
         return config;
     },
     error => Promise.reject(error)
@@ -43,3 +49,8 @@ axiosInstance.interceptors.response.use(
 );
 
 export default axiosInstance;
+
+function getXsrfToken() {
+    const xsrfCookie = document.cookie.split('; ').find(row => row.startsWith('XSRF-TOKEN='));
+    return xsrfCookie ? xsrfCookie.split('=')[1] : null;
+}

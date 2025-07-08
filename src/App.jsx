@@ -1,6 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import PrivateRoute from '*/routes/PrivateRoute.jsx';
 import { AuthProvider } from '*/auth/AuthContext.jsx';
+import axiosInstance from '*/api/axiosInstance.js';
+import { useEffect } from 'react';
 
 import LostPage from '*/pages/LostPage.jsx';
 import Home from '*/pages/home/Home.jsx';
@@ -26,6 +28,11 @@ import BookingsManagement from '*/pages/admin/BookingsManagement.jsx';
 import ReviewsManagement from '*/pages/admin/ReviewsManagement.jsx';
 
 function App() {
+
+  useEffect(() => {
+    axiosInstance.get('/csrf-token', { withCredentials: true });
+  }, []);
+
 
   return (
     <AuthProvider>
