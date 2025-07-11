@@ -1,1 +1,1 @@
-export const apiUrl = "https://bookinline-back.onrender.com";
+export const apiUrl = "https://api.bookinline.site";
