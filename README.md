@@ -1,7 +1,8 @@
 # React Client for Spring Boot Backend
 
 This is a simple React front-end application built to interact with a Spring Boot REST API.  
-The frontend provides a UI for users with different roles (`GUEST`, `HOST`, `ADMIN`) to interact with the system.
+The frontend provides a UI for users with different roles (`GUEST`, `HOST`, `ADMIN`) to interact with the system. <br /><br />
+PS: This project is deployed and you can find it on https://www.bookinline.site, if properties aren't loading, visit page in 5 minutes, I used free hosting so it sleeps after 15 minutes of idling =).
 
 > ⚠️ This project is tightly coupled with the backend and **does not work standalone**.  
 You must run the Spring Boot backend for this app to function.
