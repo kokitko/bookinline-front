@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { apiUrl } from '../config.js';
 
 function BackendStatusWrapper({ children }) {
     const [backendReady, setBackendReady] = useState(false);
@@ -7,7 +8,7 @@ function BackendStatusWrapper({ children }) {
     useEffect(() => {
         const checkBackend = async () => {
             try {
-                const res = await fetch('https://bookinline-back.onrender.com/api/health', {
+                const res = await fetch(`${apiUrl}/api/health`, {
                     method: 'GET',
                 });
 
