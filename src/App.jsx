@@ -26,6 +26,7 @@ import UserDetailsAdmin from '*/pages/admin/UserDetailsAdmin.jsx';
 import PropertiesManagement from '*/pages/admin/PropertiesManagement.jsx';
 import BookingsManagement from '*/pages/admin/BookingsManagement.jsx';
 import ReviewsManagement from '*/pages/admin/ReviewsManagement.jsx';
+import BackendStatusWrapper from '*/components/BackendStatusWrapper.jsx';
 
 function App() {
 
@@ -36,92 +37,94 @@ function App() {
 
   return (
     <AuthProvider>
-      <Router>
-        <Routes>
-          <Route path="*" element={<LostPage />} />
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/search" element={<PropertyList />} />
-          <Route path="/property/:id" element={<PropertyDetails />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/profile" element={
-            <PrivateRoute>
-              <Profile />
-            </PrivateRoute>
-          } />
-          <Route path="/bookings" element={
-            <PrivateRoute allowedRoles={['GUEST']}>
-              <MyBookings />
-            </PrivateRoute>
-          } />
-          <Route path="/booking/:id" element={
-            <PrivateRoute allowedRoles={['GUEST', 'HOST']}>
-              <Booking />
-            </PrivateRoute>
-          } />
-          <Route path="/property/:id/review" element={
-            <PrivateRoute allowedRoles={['GUEST']}>
-              <LeaveReview />
-            </PrivateRoute>
-          } />
-          <Route path="/my-reviews" element={
-            <PrivateRoute allowedRoles={['GUEST']}>
-              <MyReviews />
-            </PrivateRoute>
-          } />
-          <Route path="/property/create" element={
-            <PrivateRoute allowedRoles={['HOST']}>
-              <CreateProperty />
-            </PrivateRoute>
-          } />
-          <Route path="/properties/list" element={
-            <PrivateRoute allowedRoles={['HOST']}>
-              <MyProperties />
-            </PrivateRoute>
-          } />
-          <Route path="/properties/edit/:id" element={
-            <PrivateRoute allowedRoles={['HOST']}>
-              <EditProperty />
-            </PrivateRoute>
-          } />
-          <Route path="/bookings/host" element={
-            <PrivateRoute allowedRoles={['HOST']}>
-              <HostBookings />
-            </PrivateRoute>
-          } />
-          <Route path="/admin" element={
-            <PrivateRoute allowedRoles={['ADMIN']}>
-              <AdminDashboard />
-            </PrivateRoute>
-          } />
-          <Route path="/admin/users" element={
-            <PrivateRoute allowedRoles={['ADMIN']}>
-              <UsersManagement />
-            </PrivateRoute>
-          } />
-          <Route path="/admin/users/:userId" element={
-            <PrivateRoute allowedRoles={['ADMIN']}>
-              <UserDetailsAdmin />
-            </PrivateRoute>
-          } />
-          <Route path="/admin/properties" element={
-            <PrivateRoute allowedRoles={['ADMIN']}>
-              <PropertiesManagement />
-            </PrivateRoute>
-          } />
-          <Route path="/admin/bookings" element={
-            <PrivateRoute allowedRoles={['ADMIN']}>
-              <BookingsManagement />
-            </PrivateRoute>
-          } />
-          <Route path="/admin/reviews" element={
-            <PrivateRoute allowedRoles={['ADMIN']}>
-              <ReviewsManagement />
-            </PrivateRoute>
-          } />
-        </Routes>
-      </Router>
+      <BackendStatusWrapper>
+        <Router>
+          <Routes>
+            <Route path="*" element={<LostPage />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/search" element={<PropertyList />} />
+            <Route path="/property/:id" element={<PropertyDetails />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/profile" element={
+              <PrivateRoute>
+                <Profile />
+              </PrivateRoute>
+            } />
+            <Route path="/bookings" element={
+              <PrivateRoute allowedRoles={['GUEST']}>
+                <MyBookings />
+              </PrivateRoute>
+            } />
+            <Route path="/booking/:id" element={
+              <PrivateRoute allowedRoles={['GUEST', 'HOST']}>
+                <Booking />
+              </PrivateRoute>
+            } />
+            <Route path="/property/:id/review" element={
+              <PrivateRoute allowedRoles={['GUEST']}>
+                <LeaveReview />
+              </PrivateRoute>
+            } />
+            <Route path="/my-reviews" element={
+              <PrivateRoute allowedRoles={['GUEST']}>
+                <MyReviews />
+              </PrivateRoute>
+            } />
+            <Route path="/property/create" element={
+              <PrivateRoute allowedRoles={['HOST']}>
+                <CreateProperty />
+              </PrivateRoute>
+            } />
+            <Route path="/properties/list" element={
+              <PrivateRoute allowedRoles={['HOST']}>
+                <MyProperties />
+              </PrivateRoute>
+            } />
+            <Route path="/properties/edit/:id" element={
+              <PrivateRoute allowedRoles={['HOST']}>
+                <EditProperty />
+              </PrivateRoute>
+            } />
+            <Route path="/bookings/host" element={
+              <PrivateRoute allowedRoles={['HOST']}>
+                <HostBookings />
+              </PrivateRoute>
+            } />
+            <Route path="/admin" element={
+              <PrivateRoute allowedRoles={['ADMIN']}>
+                <AdminDashboard />
+              </PrivateRoute>
+            } />
+            <Route path="/admin/users" element={
+              <PrivateRoute allowedRoles={['ADMIN']}>
+                <UsersManagement />
+              </PrivateRoute>
+            } />
+            <Route path="/admin/users/:userId" element={
+              <PrivateRoute allowedRoles={['ADMIN']}>
+                <UserDetailsAdmin />
+              </PrivateRoute>
+            } />
+            <Route path="/admin/properties" element={
+              <PrivateRoute allowedRoles={['ADMIN']}>
+                <PropertiesManagement />
+              </PrivateRoute>
+            } />
+            <Route path="/admin/bookings" element={
+              <PrivateRoute allowedRoles={['ADMIN']}>
+                <BookingsManagement />
+              </PrivateRoute>
+            } />
+            <Route path="/admin/reviews" element={
+              <PrivateRoute allowedRoles={['ADMIN']}>
+                <ReviewsManagement />
+              </PrivateRoute>
+            } />
+          </Routes>
+        </Router>
+      </BackendStatusWrapper>
     </AuthProvider>
   )
 }
