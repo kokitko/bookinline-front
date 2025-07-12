@@ -8,7 +8,7 @@ function BackendStatusWrapper({ children }) {
     useEffect(() => {
         const checkBackend = async () => {
             try {
-                const res = await fetch(`${apiUrl}/api/health`, {
+                const res = await fetch(`${apiUrl}/api/csrf-token`, {
                     method: 'GET',
                 });
 
