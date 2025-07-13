@@ -1,1 +1,1 @@
-export const apiUrl = "https://api.bookinline.site";
+export const apiUrl = "https://api.bookinline.online";
